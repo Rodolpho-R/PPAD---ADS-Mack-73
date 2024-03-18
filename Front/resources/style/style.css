@@ -1,0 +1,73 @@
+/* GERAIS */
+body{
+    background-color: beige;
+}
+.row{
+    margin: 0;
+}
+
+.container{
+    padding: 70px 0;
+}
+
+/* ------------------Nav Bar ------------------------ */
+
+header, .navbar{
+    background-color: rgba(236, 192, 194, 0.473);
+}
+
+#nav-container{
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 55px;
+}
+
+#logo{
+    width: 75px;
+}
+
+.logo-text{
+    color: rgb(44, 24, 224);
+    font-weight: bold;
+}
+
+.logo-text:hover{
+    color: rgb(44, 24, 224);
+}
+
+.navbar-expand-lg .navbar-nav .nav-link{
+    padding: 1rem .8rem;
+    border: 1px solid blue;
+    margin: 8px;
+    color: blue;
+    border-radius: 4px;
+}
+
+.nav-link:hover{
+    background: white;
+}
+
+/* -------------------- MAIN SECTION ----------------------------- */ 
+
+.main-title{
+    color: rgb(44, 24, 224);
+    margin: 0 0 9px 0;
+    
+}
+
+.about-title{
+    color: rgba(0, 0, 139, 0.582);
+}
+
+.col-md-6 span{
+    font-weight: bold;
+}
+
+#about-list{
+    list-style: none;
+    padding-left: 0;
+}
+
+#about-list li{
+    line-height: 30px;
+}
