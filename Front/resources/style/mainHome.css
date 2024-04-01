@@ -6,14 +6,6 @@ button{
     margin-bottom: 15px;
 }
 
-a{
-    text-decoration: none;
-    color: white;
-}
-
-a:hover{
-    color: black;
-}
 
 .btnHover:hover{
     color: black;
