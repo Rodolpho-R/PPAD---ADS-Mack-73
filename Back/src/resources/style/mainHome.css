@@ -1,0 +1,17 @@
+h3{
+    margin: 15px  0 25px 0;
+}
+
+button{
+    margin-bottom: 15px;
+}
+
+
+.btnHover:hover{
+    color: black;
+}
+
+.btn-warning{
+    color: white;
+}
+

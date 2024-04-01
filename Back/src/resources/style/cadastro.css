@@ -1,0 +1,14 @@
+/*Gerais*/
+
+
+/*Responsividade*/
+@media(max-width: 768px){
+    .form-cadastro{
+        margin-top: 0;
+        margin-bottom: 35px;
+    }
+
+    .logo-cadastro{
+        margin-bottom: 0;
+    }
+}

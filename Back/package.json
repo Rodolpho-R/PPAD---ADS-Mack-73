@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.3",
+    "sequelize": "^6.37.2"
+  },
+  "name": "back",
+  "version": "1.0.0",
+  "description": "Octagono School System",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Rodolpho-R/PPAD---ADS-Mack-73.git"
+  },
+  "author": "Jackson Dantas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rodolpho-R/PPAD---ADS-Mack-73/issues"
+  },
+  "homepage": "https://github.com/Rodolpho-R/PPAD---ADS-Mack-73#readme"
+}

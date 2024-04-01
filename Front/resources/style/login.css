@@ -1,0 +1,19 @@
+/*Nav Bar*/
+
+
+
+/*Login Area*/
+
+.input-login{
+    margin: 5px;
+}
+
+.form-container{
+    padding-top: 100px;
+}
+
+@media(max-width: 412px){
+    .form-container{
+        padding-top: 0px;
+    }
+}

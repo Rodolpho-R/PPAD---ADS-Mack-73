@@ -1,0 +1,25 @@
+h3{
+    margin: 15px  0 25px 0;
+}
+
+button{
+    margin-bottom: 15px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    color: black;
+}
+
+.btnHover:hover{
+    color: black;
+}
+
+.btn-warning{
+    color: white;
+}
+
