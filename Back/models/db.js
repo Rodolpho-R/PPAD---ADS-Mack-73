@@ -16,39 +16,6 @@ module.exports = {
     sequelize: sequelize
 }
 
-/*Criação do DB
-    const Alunos = sequelize.define('alunos1', {
 
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-      
-    },
-    turma: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-
-    faltas: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-      },
-    
-      responsavel_nome: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-
-      responsavel_email: {
-        type: DataTypes.STRING,
-        allowNull: false
-      }
-  });
-*/
 
 

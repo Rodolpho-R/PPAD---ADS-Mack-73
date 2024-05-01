@@ -1,6 +1,6 @@
 const db = require('./db'); 
 
-const Alunos = db.sequelize.define('alunos1s', {
+const Faltas = db.sequelize.define('faltas', {
     id: {
         type: db.Sequelize.INTEGER,
         autoIncrement: true,
@@ -19,26 +19,14 @@ const Alunos = db.sequelize.define('alunos1s', {
     faltas: {
         type: db.Sequelize.INTEGER,
         allowNull: true
-      },
-    
-      responsavel_nome: {
-        type: db.Sequelize.STRING,
-        allowNull: false
-      },
-
-      responsavel_email: {
-        type: db.Sequelize.STRING,
-        allowNull: false
       }
 });
 
 //****Criar DB, caso não criado:  *****/
-// Alunos.sync().then(() => {
-//   console.log('Tabela Alunos criada com sucesso!');
+// Faltas.sync().then(() => {
+//     console.log('Tabela criada com sucesso!');
 // }).catch((error) => {
-//   console.error('Erro ao criar tabela:', error);
+//     console.error('Erro ao criar tabela:', error);
 // });
 
-
-
-module.exports = Alunos;
+module.exports = Faltas;
