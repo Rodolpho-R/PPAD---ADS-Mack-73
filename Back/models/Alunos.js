@@ -33,11 +33,11 @@ const Alunos = db.sequelize.define('alunos1s', {
 });
 
 //****Criar DB, caso não criado:  *****/
-// Alunos.sync().then(() => {
-//   console.log('Tabela Alunos criada com sucesso!');
-// }).catch((error) => {
-//   console.error('Erro ao criar tabela:', error);
-// });
+Alunos.sync().then(() => {
+console.log('Tabela Alunos criada com sucesso!');
+}).catch((error) => {
+   console.error('Erro ao criar tabela:', error);
+});
 
 
 

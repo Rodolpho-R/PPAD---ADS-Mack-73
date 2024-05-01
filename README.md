@@ -1,5 +1,6 @@
 # Projeto de Prática Profissional em ADS
 Grupo - ADS Mack
+
 1 - Instalação do banco de dados MYSQL server e workbeanch 8 ou superior;
 2 - Configurando o MYSQL com Prompt de comando: 
 
