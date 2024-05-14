@@ -1,8 +1,9 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize('school_octagano', 'jackOne', '1234', {
-    host: 'localhost',
-    dialect: 'mysql'
+const sequelize = new Sequelize('octagonoschool', 'jackOne', '12345678', {
+    host: 'octagonoschool.clacmim6a0xe.us-east-1.rds.amazonaws.com',
+    dialect: 'mysql',
+    port: 3306
 });
 
 sequelize.authenticate().then(function(){

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body{
+            background-color: beige;
+            margin: 0;
+            padding: 0;
+        }
+        header{
+            background-color: rgb(236, 192, 194);
+        }
+
+        h1{
+             color: rgb(44, 24, 224);
+             font-weight: bold;
+             text-align: center;
+             margin: 25px 0;
+        }
+       
+        .navbar{
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+        .main-container{
+            width: 100%;
+            display: flex;
+            justify-content: space-around;    
+       }
+
+        .aluno{
+            width: 80%;
+            margin: 6px;
+            padding: 8px;
+            display: inline-block;
+            border: 2px solid black;
+            border-radius: 4%;
+        }
+
+        .aluno:hover{
+            background-color: bisque;
+            box-shadow: 8px -5px 5px red; 
+            border: 2px solid wheat;
+        }
+
+        p > span{
+            font-weight: bold;
+        }
+
+        nav  span{
+            font-size: 30px;    
+        }
+
+        {{!-- Responsividade --}}
+
+        @media (max-width: 1024px) {
+            .main-container{
+                flex-wrap: wrap
+            }
+
+            .aluno{
+                border-radius: 0;
+                box-shadow: 1px 1px 8px red, -1px -1px 8px red;
+                border: 2px solid rgba(238, 229, 213, 0.563);
+                margin: 15px; 
+            }
+        }   
+
+    </style>
+
+    <header>
+        <div class="container" id="nav-container">
+            <nav class="navbar">
+                <a href="../../Front/mainHome.html" class="navbar-brand logo-text">
+                    {{!-- <img id="logo" src="../src/resources/logo/Octagono School/favicon_transparent_32x32.png" alt="Octagono School Logo"> --}}
+                     <span>Octagono School </span>
+                </a> 
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main -->
+
+    <h1>Lista de Alunos</h1>
+    <div class="main-container">
+        
+            {{#each relatorio}}
+                <div class="aluno">
+                <p> <span>Nome:</span> {{dataValues.name}} </p>
+                <p> <span> Turma:</span> {{dataValues.turma}} </p>
+                <p> <span>Faltas:</span>  {{dataValues.faltas}} </p>
+                <p><span> Responsavel: </span> {{dataValues.responsavel_nome}}</p>
+                <p> <span> E-mail: </span> {{dataValues.responsavel_email}}</p>
+                </div>     
+            {{/each}}
+        
+    </div>
+    
+    
+</body>
+</html>
+

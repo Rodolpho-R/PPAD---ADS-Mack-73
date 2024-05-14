@@ -41,5 +41,12 @@ app.post('/cadastro-faltas', function(req, res){
     })
 });
 
+//Rota para Listar
+app.get('/listarFaltas', function(req, res){
+    aluno.findAll({order: [['faltas', 'DESC']]}).then(function(alunos){
+        res.render('listarFaltas', {relatorio: alunos});
+    })    
+});
+
 
 app.listen(8080);
