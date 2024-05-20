@@ -31,22 +31,28 @@
         .main-container{
             width: 100%;
             display: flex;
-            justify-content: space-around;    
+            justify-content: space-around; 
+            flex-wrap: wrap;   
        }
 
         .aluno{
-            width: 80%;
+            width: 50%;
             margin: 6px;
             padding: 8px;
             display: inline-block;
             border: 2px solid black;
-            border-radius: 4%;
+            {{!-- border-radius: 2%; --}}
         }
 
         .aluno:hover{
             background-color: bisque;
             box-shadow: 8px -5px 5px red; 
             border: 2px solid wheat;
+        }
+
+        .span-faltas{
+            font-weight: bold;
+            color: red;
         }
 
         p > span{
@@ -77,7 +83,7 @@
     <header>
         <div class="container" id="nav-container">
             <nav class="navbar">
-                <a href="../../Front/mainHome.html" class="navbar-brand logo-text">
+                <a href="/mainHome.html" class="navbar-brand logo-text">
                     {{!-- <img id="logo" src="../src/resources/logo/Octagono School/favicon_transparent_32x32.png" alt="Octagono School Logo"> --}}
                      <span>Octagono School </span>
                 </a> 
@@ -94,7 +100,7 @@
                 <div class="aluno">
                 <p> <span>Nome:</span> {{dataValues.name}} </p>
                 <p> <span> Turma:</span> {{dataValues.turma}} </p>
-                <p> <span>Faltas:</span>  {{dataValues.faltas}} </p>
+                <p> <span>Faltas:</span> <span class="span-faltas">{{dataValues.faltas}}</span>  </p>
                 <p><span> Responsavel: </span> {{dataValues.responsavel_nome}}</p>
                 <p> <span> E-mail: </span> {{dataValues.responsavel_email}}</p>
                 </div>     

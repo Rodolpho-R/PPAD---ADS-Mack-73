@@ -3,6 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Aluno</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./resources/icons/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./resources/icons/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./resources/icons/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="./resources/icons/favicon_io/site.webmanifest">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./resources/style/style.css">
+    <!-- Font Awesome icons -->
+    <script src="https://kit.fontawesome.com/230ec3de76.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <header>
+        <div class="container" id="nav-container">
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <a href="index.html" class="navbar-brand logo-text">
+                    <img id="logo" src="./resources/logo/Octagono School/favicon_transparent_32x32.png" alt="Octagono School Logo">
+                    Octagono School
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container-fluid">
+            <div id="cadastro-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 form-container">
+                            <h3 class="about-title text-primary text-center">Cadastrar Aluno</h3>
+                            <form id="cadAlunoForm">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control input-aluno" id="nome" name="nome" placeholder="Nome Completo" required>
+                                    <label for="nome">Nome Completo</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" id="turma" name="turma" required>
+                                        <option value="" selected disabled>Selecione a Turma</option>
+                                        {{#each turmas}}
+                                            <option value="{{this.nome}}">{{this.nome}}</option>
+                                        {{/each}}
+                                    </select>
+                                    <label for="turma">Turma</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control input-aluno" id="faltas" name="faltas" placeholder="Faltas" required>
+                                    <label for="faltas">Faltas</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control input-aluno" id="responsavel_nome" name="responsavel_nome" placeholder="Nome do Responsável" required>
+                                    <label for="responsavel_nome">Nome do Responsável</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control input-aluno" id="responsavel_email" name="responsavel_email" placeholder="Email do Responsável" required>
+                                    <label for="responsavel_email">Email do Responsável</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 fs-5 fw-bold">Cadastrar</button>  
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div id="copy-area">
+            <div class="container-fluid footer">
+                <p> Octagono School - Todos os direitos Reservados <i class="fa-regular fa-copyright"></i></p>  
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('cadAlunoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value.trim();
+            const turma = document.getElementById('turma').value;
+            const faltas = document.getElementById('faltas').value.trim();
+            const responsavel_nome = document.getElementById('responsavel_nome').value.trim();
+            const responsavel_email = document.getElementById('responsavel_email').value.trim();
+
+            fetch('/cadastro', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nome: nome,
+                    turma: turma,
+                    faltas: faltas,
+                    responsavel_nome: responsavel_nome,
+                    responsavel_email: responsavel_email
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    window.location.href = '/mainHome.html?message=' + encodeURIComponent(data.message);
+                } else {
+                    alert(`Erro: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao cadastrar o aluno.');
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+{{!-- <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Aluno</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./resources/icons/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./resources/icons/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./resources/icons/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="./resources/icons/favicon_io/site.webmanifest">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./resources/style/style.css">
+    <!-- Font Awesome icons -->
+    <script src="https://kit.fontawesome.com/230ec3de76.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <header>
+        <div class="container" id="nav-container">
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <a href="/mainHome.html" class="navbar-brand logo-text">
+                    <img id="logo" src="./resources/logo/Octagono School/favicon_transparent_32x32.png" alt="Octagono School Logo">
+                    Octagono School
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container-fluid">
+            <div id="cadastro-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 form-container">
+                            <h3 class="about-title text-primary text-center">Cadastrar Aluno</h3>
+                            <form id="cadAlunoForm">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control input-aluno" id="nome" name="nome" placeholder="Nome Completo" required>
+                                    <label for="nome">Nome Completo</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control input-aluno" id="turma" name="turma" placeholder="Turma" required>
+                                    <label for="turma">Turma</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="number" class="form-control input-aluno" id="faltas" name="faltas" placeholder="Faltas" required>
+                                    <label for="faltas">Faltas</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control input-aluno" id="responsavel_nome" name="responsavel_nome" placeholder="Nome do Responsável" required>
+                                    <label for="responsavel_nome">Nome do Responsável</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="email" class="form-control input-aluno" id="responsavel_email" name="responsavel_email" placeholder="Email do Responsável" required>
+                                    <label for="responsavel_email">Email do Responsável</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 fs-5 fw-bold">Cadastrar</button>  
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div id="copy-area">
+            <div class="container-fluid footer">
+                <p> Octagono School - Todos os direitos Reservados <i class="fa-regular fa-copyright"></i></p>  
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('cadAlunoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value.trim();
+            const turma = document.getElementById('turma').value.trim();
+            const faltas = document.getElementById('faltas').value.trim();
+            const responsavel_nome = document.getElementById('responsavel_nome').value.trim();
+            const responsavel_email = document.getElementById('responsavel_email').value.trim();
+
+            fetch('/cadastro', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nome: nome,
+                    turma: turma,
+                    faltas: faltas,
+                    responsavel_nome: responsavel_nome,
+                    responsavel_email: responsavel_email
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    window.location.href = '/mainHome.html?message=' + encodeURIComponent(data.message);
+                } else {
+                    alert(`Erro: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao cadastrar o aluno.');
+            });
+        });
+    </script>
+
+</body>
+</html> --}}
+
+
+
+
+{{!-- <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>School</title>
     <link rel="apple-touch-icon" sizes="180x180" href="./../resources/icons/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./../resources/icons/favicon_io/favicon-32x32.png">
@@ -75,7 +324,53 @@
         </div> 
     </div>
    </footer>
-    
+
+   <script>
+    const cadastro = document.getElementById('btnCadastrar');
+
+    cadastro.addEventListener('click', async () => {
+    try {
+        const response = await fetch('/cadastro', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+        console.log(data); // Verifique os dados recebidos do servidor
+
+        if (data.success) {
+            alert(data.message);
+        } else {
+            alert('Erro ao cadastrar. Por favor, tente novamente.');
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+        alert('Erro ao enviar solicitação. Por favor, tente novamente.');
+    }
+});
+
+    /*cadastro.addEventListener('click', async() => {
+        fetch('/cadastro', {
+        method: 'POST',
+        headers: {
+                'Content-Type': 'application/json'
+            }
+           
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Exibe a mensagem recebida do servidor em um alerta
+            alert(data.message);
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao enviar solicitação. Por favor, tente novamente.');
+        });
+    }) */
+        
+   </script>
  
 </body>
-</html>
+</html> --}}

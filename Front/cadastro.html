@@ -20,6 +20,45 @@
     <script src="https://kit.fontawesome.com/230ec3de76.js" crossorigin="anonymous"></script>
     <!--BootsTrap JS-->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!--Login FireBase-->
+
+    <script type="module" src="./auth/firebaseConfig.js" defer></script>
+    <script type="module">
+        import { auth, createUserWithEmailAndPassword } from './auth/firebaseConfig.js';
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const formCadastro = document.getElementById("registerForm");
+
+            formCadastro.addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                const email = document.getElementById("email").value.trim();
+                const password = document.getElementById("password").value.trim();
+                const confirmPassword = document.getElementById("confirmPassword").value.trim();
+
+                if (password.length < 8) {
+                    alert("A senha deve conter no mínimo 8 caracteres.");
+                    return;
+               }
+
+                if (password !== confirmPassword) {
+                    alert("As senhas não coincidem. Por favor, verifique.");
+                    return;
+                } 
+                
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        alert("Cadastro efetuado com sucesso!");
+                        window.location.href = "./login.html";
+                    })
+                    .catch((error) => {
+                        alert(`Erro ao cadastrar: ${error.message}`);
+                    });
+            });
+        });
+    </script>
+
 </head>
 <body>
 
@@ -56,7 +95,7 @@
                         </div>
                         <div class="col-md-6 form-container form-cadastro">
                             <h3 class="about-title text-primary text-center">Faça Seu Cadastro <i class="fa-solid fa-user-shield" style="color: #4d59fff5;"></i> </h3>
-                            <form action="./login.html">
+                            <form id="registerForm" action="/register" method="post">
                                 <div class="form-floating">
                                     <input type="text" class="form-control input-login nome" id="floatingInput" placeholder="Nome">
                                     <label for="floatingInput">Nome Completo</label>
@@ -66,15 +105,15 @@
                                     <label for="floatingInput">Cargo</label>
                                 </div>
                                 <div class="form-floating">
-                                    <input type="email" class="form-control input-login email" id="floatingInput" placeholder="email@example.com">
+                                    <input type="email" class="form-control input-login email" id="email" placeholder="email@example.com">
                                     <label for="floatingInput">E-mail</label>
                                 </div>
                                 <div class="form-floating">
-                                    <input type="password" class="form-control input-login senha" id="floatingInput" placeholder="password">
+                                    <input type="password" class="form-control input-login senha" id="password" placeholder="password">
                                     <label for="floatingInput">Senha</label>
                                 </div>
                                 <div class="form-floating">
-                                    <input type="password" class="form-control input-login confirmaSenha" id="floatingInput" placeholder="password">
+                                    <input type="password" class="form-control input-login confirmaSenha" id="confirmPassword" placeholder="password">
                                     <label for="floatingInput">Confirme a senha</label>
                                 </div>
                                 
@@ -96,7 +135,7 @@
     </div>
    </footer>
     
- <script>
+ <!-- <script>
 
 document.addEventListener("DOMContentLoaded", function() {
     
@@ -135,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
- </script>
+ </script> -->
 
 </body>
 </html>

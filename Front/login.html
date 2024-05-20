@@ -18,6 +18,33 @@
     <script src="https://kit.fontawesome.com/230ec3de76.js" crossorigin="anonymous"></script>
     <!--BootsTrap JS-->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Firebase Configuration -->
+    <script type="module" src="./auth/firebaseConfig.js" defer></script>
+    <script type="module">
+        import { auth, signInWithEmailAndPassword } from './auth/firebaseConfig.js';
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const formLogin = document.getElementById("loginForm");
+
+            formLogin.addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                const email = document.getElementById("email").value.trim();
+                const password = document.getElementById("password").value.trim();
+
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        alert("Login bem-sucedido!");
+                        window.location.href = "./mainHome.html";
+                    })
+                    .catch((error) => {
+                        alert(`Erro ao fazer login o email: ${email} ou a senha **** são INVÁLIDOS`);
+                    });
+            });
+        });
+    </script>
+
 </head>
 <body>
 
@@ -54,13 +81,13 @@
                         </div>
                         <div class="col-md-6 form-container">
                             <h3 class="about-title text-primary text-center">Faça seu Login <i class="fa-solid fa-user-shield" style="color: #4d59fff5;"></i> </h3>
-                            <form action="./mainHome.html">
+                            <form id="loginForm">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control input-login email" id="floatingInput" placeholder="email@example.com">
+                                    <input type="email" class="form-control input-login email" id="email" placeholder="email@example.com">
                                     <label for="floatingInput">E-mail</label>
                                 </div>
                                 <div class="form-floating">
-                                    <input type="password" class="form-control input-login senha" id="floatingInput" placeholder="password">
+                                    <input type="password" class="form-control input-login senha" id="password" placeholder="password">
                                     <label for="floatingInput">Senha</label>
                                 </div>
                                 <div class="form-check text-start my-3">
@@ -85,7 +112,6 @@
     </div>
    </footer>
     
-<script src="./resources/scripts/loginScript.js"></script>
-
+   <!-- <script src="./resources/scripts/loginScript.js"></script> -->
 </body>
 </html>

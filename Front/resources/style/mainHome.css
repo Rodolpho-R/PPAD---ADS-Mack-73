@@ -13,7 +13,8 @@ a{
 
 
 .btnHover:hover{
-    color: black;
+    color: rgb(0, 0, 0); 
+    font-size: larger;
 }
 
 .btn-warning{

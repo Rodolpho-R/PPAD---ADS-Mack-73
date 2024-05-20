@@ -3,70 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="./../resources/icons/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./../resources/icons/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./../resources/icons/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="./../resources/icons/favicon_io/site.webmanifest">
-    <!--Bootstrap CSS-->
+    <title>Cadastro de Faltas</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./resources/icons/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./resources/icons/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./resources/icons/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="./resources/icons/favicon_io/site.webmanifest">
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!--Our Custom CSS Home Page-->
-    <link rel="stylesheet" href="./../src/resources/style/style.css">
-    <!--Our Custom CSS Login Page-->
-    <link rel="stylesheet" href="./../src/resources/style/login.css">
-    <!--Our Custom CSS Cadastro Page-->
-    <link rel="stylesheet" href="./../src/resources/style/cadastro.css">
-    <!--Font Awesome icons-->
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./resources/style/style.css">
+    <!-- Font Awesome icons -->
     <script src="https://kit.fontawesome.com/230ec3de76.js" crossorigin="anonymous"></script>
-    <!--BootsTrap JS-->
+    <!-- Bootstrap JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
 
     <header>
-        
+        <div class="container" id="nav-container">
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <a href="/mainHome.html" class="navbar-brand logo-text">
+                    <img id="logo" src="./resources/logo/Octagono School/favicon_transparent_32x32.png" alt="Octagono School Logo">
+                    Octagono School
+                </a>
+            </nav>
+        </div>
     </header>
 
-   <main>
+    <main>
         <div class="container-fluid">
-            <div id="cadastro-aluno">
+            <div id="cadastro-area">
                 <div class="container">
                     <div class="row">
-                    
-                        <div class="col-md-6 form-container form-cadastro">
-                            <h3 class="about-title text-primary text-center">Cadastrar nova falta <i class="fa-solid fa-user-shield" style="color: #4d59fff5;"></i> </h3>
-                            <form action="/cadastro-faltas" method="POST">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control input-login nome" name="nome" id="floatingInput" placeholder="Nome">
-                                    <label for="floatingInput">Nome Completo</label>
+                        <div class="col-md-6 form-container">
+                            <h3 class="about-title text-primary text-center">Cadastrar Faltas</h3>
+                            <form id="cadFaltasForm">
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" id="alunoId" name="alunoId" required>
+                                        <option value="" selected disabled>Selecione o Aluno</option>
+                                        {{#each alunos}}
+                                            <option value="{{this.id}}">{{this.name}} - Turma: {{this.turma}}</option>
+                                        {{/each}}
+                                    </select>
+                                    <label for="alunoId">Aluno</label>
                                 </div>
-                                <div class="form-floating">
-                                    <input type="text" class="form-control input-login turma" name="turma" id="floatingInput" placeholder="Turma">
-                                    <label for="floatingInput">Turma</label>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control input-faltas" id="faltas" name="faltas" placeholder="Quantidade de Faltas" required>
+                                    <label for="faltas">Quantidade de Faltas</label>
                                 </div>
-                                <div class="form-floating">
-                                    <input type="number" class="form-control input-login notas" name="faltas" id="floatingInput" placeholder="Notas">
-                                    <label for="floatingInput">Faltas</label>
-                                </div>
-                                <button type="submit" id="btnCadastrar" class="btn btn-primary w-100 fs-5 fw-bold">Cadastrar</button>  
+                                <button type="submit" class="btn btn-primary w-100 fs-5 fw-bold">Registrar Falta</button>  
                             </form>
-                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-   </main>
+    </main>
 
-   <footer>
+    <footer>
+        <div id="copy-area">
+            <div class="container-fluid footer">
+                <p> Octagono School - Todos os direitos Reservados <i class="fa-regular fa-copyright"></i></p>  
+            </div>
+        </div>
+    </footer>
 
-    <div id="copy-area">
-        <div class="container-fluid footer">
-            <p> Octagono School - Todos os direitos Reservados <i class="fa-regular fa-copyright"></i></p>  
-        </div> 
-    </div>
-   </footer>
-    
- 
+    <script>
+        document.getElementById('cadFaltasForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const alunoId = document.getElementById('alunoId').value;
+            const faltas = document.getElementById('faltas').value.trim();
+
+            fetch('/cadastro-faltas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    alunoId: alunoId,
+                    faltas: faltas
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    window.location.href = '/mainHome.html?message=' + encodeURIComponent(data.message);
+                } else {
+                    alert(`Erro: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao registrar a falta.');
+            });
+        });
+    </script>
+
 </body>
 </html>
